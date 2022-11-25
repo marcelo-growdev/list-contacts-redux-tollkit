@@ -2,12 +2,13 @@ import React from "react";
 import Badge from "@mui/material/Badge";
 import PhoneIcon from "@mui/icons-material/PhoneOutlined";
 import { useAppSelector } from "../store/hooks";
+import { selectContacts } from "../store/modules/ContactsSlice";
 
 const ContactsCounter: React.FC = () => {
-  const contatcsRedux = useAppSelector((state) => state.contacts);
+  const contactsRedux = useAppSelector(selectContacts);
 
   return (
-    <Badge badgeContent={contatcsRedux.length} color="secondary">
+    <Badge badgeContent={contactsRedux.length} color="secondary">
       <PhoneIcon />
     </Badge>
   );

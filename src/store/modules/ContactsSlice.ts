@@ -1,32 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { ContactsType, ContactType } from "../../types";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
+import { ContactType } from "../../types";
 
-const initialState: ContactsType = [];
+const adapter = createEntityAdapter<ContactType>({
+  selectId: (item) => item.phone,
+});
 
-const contactsSlice = createSlice({
+export const { selectAll: selectContacts, selectById: selectContactById } =
+  adapter.getSelectors((state: RootState) => state.contacts);
+
+const sliceContacts = createSlice({
   name: "contacts",
-  initialState,
+  initialState: adapter.getInitialState({ status: "" }),
   reducers: {
-    addContact(state, action: PayloadAction<ContactType>) {
-      state.push(action.payload);
-    },
-    deleteContact(state, action: PayloadAction<ContactType>) {
-      const index = state.findIndex(
-        (item) =>
-          item.name === action.payload.name &&
-          item.phone === action.payload.phone
-      );
-
-      if (index >= 0) {
-        state.splice(index, 1);
-      }
-    },
-    clear() {
-      return initialState;
-    },
+    addContact: adapter.addOne,
+    addMany: adapter.addMany,
+    updateContact: adapter.updateOne,
+    deleteContact: adapter.removeOne,
+    deleteContacts: adapter.removeAll,
   },
 });
 
-export const { addContact, deleteContact, clear } = contactsSlice.actions;
-export default contactsSlice.reducer;
+export const { addContact, addMany, deleteContact, updateContact } =
+  sliceContacts.actions;
+export default sliceContacts.reducer;
