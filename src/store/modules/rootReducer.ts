@@ -5,6 +5,7 @@ import contacts from "./ContactsSlice";
 import login from "./LoginSlice";
 import message from "./MessageSlice";
 import transactions from "./TransactionsSlice";
+import products from "./ProductsSlice";
 
 export default combineReducers({
   counter,
@@ -12,4 +13,5 @@ export default combineReducers({
   login,
   message,
   transactions,
+  products,
 });

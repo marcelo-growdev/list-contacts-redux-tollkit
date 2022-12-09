@@ -4,6 +4,7 @@ import DefaultLayout from "../config/layout/Default";
 import Counter from "../pages/Counter";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import Products from "../pages/Products";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/counter",
     element: <DefaultLayout page={<Counter />} />,
+  },
+  {
+    path: "/products",
+    element: <DefaultLayout page={<Products />} />,
   },
   {
     path: "/login",
