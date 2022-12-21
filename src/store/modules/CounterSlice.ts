@@ -1,31 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CounterState {
+interface ConuterType {
   value: number;
 }
 
-const initialState = { value: 0 } as CounterState;
+const initialState: ConuterType = {
+  value: 0,
+};
 
 const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    aumentar(state) {
-      state.value++;
+    aumentar: (state) => {
+      state.value = state.value + 1;
     },
-    diminuir(state) {
-      state.value--;
+    diminuir: (state) => {
+      if (state.value === 0) {
+        return;
+      }
+
+      state.value = state.value - 1;
     },
-    somarValor(state, action: PayloadAction<number>) {
-      state.value += action.payload;
-    },
-    diminuirValor(state, action: PayloadAction<number>) {
-      state.value -= action.payload;
+    aumentarComValor: (state, action: PayloadAction<number>) => {
+      state.value = state.value + action.payload;
     },
   },
 });
 
-export const { aumentar, diminuir, somarValor, diminuirValor } =
-  counterSlice.actions;
+export const { aumentar, diminuir, aumentarComValor } = counterSlice.actions;
 export default counterSlice.reducer;

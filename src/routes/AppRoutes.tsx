@@ -5,6 +5,7 @@ import Counter from "../pages/Counter";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Products from "../pages/Products";
+import Transactions from "../pages/Transactions";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/counter",
     element: <DefaultLayout page={<Counter />} />,
+  },
+  {
+    path: "/transactions",
+    element: <DefaultLayout page={<Transactions />} />,
   },
   {
     path: "/products",
