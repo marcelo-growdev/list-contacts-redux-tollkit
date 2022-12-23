@@ -5,9 +5,10 @@ import {
 } from "@reduxjs/toolkit";
 import { RootState } from "..";
 
-interface Transaction {
+export interface Transaction {
   id: number;
   value: number;
+  note?: string;
   type: "C" | "D";
 }
 
@@ -25,11 +26,16 @@ const transactionsSlice = createSlice({
   initialState: transactionAdapter.getInitialState(),
   reducers: {
     createTransaction: transactionAdapter.addOne,
+    updateTransaction: transactionAdapter.updateOne,
     deleteTransaction: transactionAdapter.removeOne,
-    clearTransaction: transactionAdapter.removeAll,
+    clearTransactions: transactionAdapter.removeAll,
   },
 });
 
-export const { createTransaction, clearTransaction, deleteTransaction } =
-  transactionsSlice.actions;
+export const {
+  createTransaction,
+  clearTransactions,
+  deleteTransaction,
+  updateTransaction,
+} = transactionsSlice.actions;
 export default transactionsSlice.reducer;

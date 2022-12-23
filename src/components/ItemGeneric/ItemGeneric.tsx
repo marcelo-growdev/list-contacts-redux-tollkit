@@ -10,15 +10,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import { ContactType } from "../../types";
+import { Transaction } from "../../store/modules/TransactionsSlice";
 
-interface ItemContactProps {
-  contact: ContactType;
-  actionDelete: (contact: ContactType) => void;
+interface ItemGenericProps {
+  contact?: ContactType;
+  transaction?: Transaction;
+  actionDelete: (data: ContactType | Transaction | undefined) => void;
   actionEdit: () => void;
 }
 
-const ItemContact: React.FC<ItemContactProps> = ({
+const ItemGeneric: React.FC<ItemGenericProps> = ({
   contact,
+  transaction,
   actionDelete,
   actionEdit,
 }) => {
@@ -37,7 +40,7 @@ const ItemContact: React.FC<ItemContactProps> = ({
               <EditIcon />
             </IconButton>
             <IconButton
-              onClick={() => actionDelete(contact)}
+              onClick={() => actionDelete(contact ? contact : transaction)}
               edge="end"
               aria-label="delete"
             >
@@ -47,13 +50,16 @@ const ItemContact: React.FC<ItemContactProps> = ({
         }
       >
         <ListItemAvatar>
-          <Avatar alt={contact.name} />
+          <Avatar>{contact ? contact.name[0] : transaction?.type}</Avatar>
         </ListItemAvatar>
-        <ListItemText primary={contact.name} secondary={contact.phone} />
+        <ListItemText
+          primary={contact ? contact.name : `R$ ${transaction?.value}`}
+          secondary={contact ? contact.name : transaction?.note}
+        />
       </ListItem>
       <Divider variant="inset" />
     </>
   );
 };
 
-export default ItemContact;
+export default ItemGeneric;

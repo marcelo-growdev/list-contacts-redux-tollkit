@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import FormContact from "../components/FormContact/FormContact";
 import { ContactType } from "../types";
-import ItemContact from "../components/ItemContact/ItemContact";
+import ItemContact from "../components/ItemGeneric/ItemGeneric";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { addContact, deleteContact } from "../store/modules/ContactsSlice";

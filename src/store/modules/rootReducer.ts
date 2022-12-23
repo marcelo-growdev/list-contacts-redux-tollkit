@@ -6,6 +6,7 @@ import message from "./MessageSlice";
 import products from "./ProductsSlice";
 import counter from "./CounterSlice";
 import transactions from "./TransactionsSlice";
+import transaction from "./TransactionSlice";
 
 export default combineReducers({
   counter,
@@ -14,4 +15,5 @@ export default combineReducers({
   message,
   products,
   transactions,
+  transaction,
 });
